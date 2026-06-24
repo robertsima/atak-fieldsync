@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(New-Item *)",
+      "Bash(javap -p \"libs/main.jar\")",
+      "Bash(adb shell *)",
+      "PowerShell(adb shell *)",
+      "PowerShell(adb *)"
+    ]
+  }
+}

@@ -69,6 +69,7 @@ buildscript {
 
 plugins {
     id("com.android.application")
+    id("org.jetbrains.kotlin.android") version "2.2.0"
 }
 apply {
     plugin("atak-takdev-plugin")
@@ -114,9 +115,9 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    //kotlinOptions {
-    //    jvmTarget = JavaVersion.VERSION_17
-    //}
+    kotlinOptions {
+        jvmTarget = "17"
+    }
 
     // this is required and should not be removed otherwise the TAK 
     // inner signing check will fail and the plugin will not load
@@ -131,6 +132,7 @@ android {
     packagingOptions {
         jniLibs {
             useLegacyPackaging = true
+            keepDebugSymbols.add("**/libdittoffi.so")
         }
     }
 
@@ -229,17 +231,17 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 34
 
         def runTasks = gradle.startParameter.taskNames
         if(runTasks.toString().contains('bundle')) {
             ndk {
-                abiFilters "armeabi-v7a", "arm64-v8a"
+                abiFilters "armeabi-v7a", "arm64-v8a",  "x86_64"
             }
         } else { 
             ndk {
-                abiFilters "armeabi-v7a", "arm64-v8a", "x86"
+                abiFilters "armeabi-v7a", "arm64-v8a",  "x86_64"
             }
         }
     }
@@ -247,6 +249,22 @@ android {
         abortOnError true
         checkReleaseBuilds true
     }
+}
+
+// Inject Ditto credentials from .env file into BuildConfig
+def envProps = new Properties()
+def envFile = rootProject.file('.env')
+if (envFile.exists()) {
+    envFile.withInputStream { envProps.load(it) }
+}
+
+android.applicationVariants.all { variant ->
+    variant.buildConfigField "String", "DITTO_APP_ID",
+        "\"${envProps.getProperty('DITTO_APP_ID', '')}\""
+    variant.buildConfigField "String", "DITTO_PLAYGROUND_TOKEN",
+        "\"${envProps.getProperty('DITTO_PLAYGROUND_TOKEN', '')}\""
+    variant.buildConfigField "String", "DITTO_AUTH_URL",
+        "\"${envProps.getProperty('DITTO_AUTH_URL', '')}\""
 }
 
 afterEvaluate {
@@ -286,6 +304,8 @@ def getCommandFlavor() {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
+    implementation 'com.ditto:ditto-kotlin-android:5.0.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 }
 
 configurations.all {
