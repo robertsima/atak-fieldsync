@@ -1,5 +1,5 @@
 
-package com.atakmap.android.plugintemplate.plugin;
+package com.fieldsync.plugin.plugin;
 
 import android.content.Context;
 

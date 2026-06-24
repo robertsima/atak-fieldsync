@@ -1,5 +1,5 @@
 
-package com.atakmap.android.plugintemplate.plugin;
+package com.fieldsync.plugin.plugin;
 
 import java.io.File;
 import android.content.Context;
@@ -14,7 +14,7 @@ public class PluginNativeLoader {
 
     /**
     * If a plugin wishes to make use of this class, they will need to copy it into their plugin.
-    * The classloader that loads this class is a key component of getting System.load to work 
+    * The classloader that loads this class is a key component of getting System.load to work
     * properly.   If it is desirable to use this in a plugin, it will need to be a direct copy in a
     * non-conflicting package name.
     */
@@ -34,8 +34,8 @@ public class PluginNativeLoader {
 
     /**
     * Security guidance from our recent audit:
-    * Pass an absolute path to System.load(). Avoid System.loadLibrary() because its behavior 
-    * depends upon its implementation which often relies on environmental features that can be 
+    * Pass an absolute path to System.load(). Avoid System.loadLibrary() because its behavior
+    * depends upon its implementation which often relies on environmental features that can be
     * manipulated. Use only validated, sanitized absolute paths.
     */
 

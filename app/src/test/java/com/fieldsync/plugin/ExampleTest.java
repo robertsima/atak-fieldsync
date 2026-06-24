@@ -1,5 +1,5 @@
 
-package com.atakmap.android.test;
+package com.fieldsync.plugin;
 
 import static org.junit.Assert.*;
 
