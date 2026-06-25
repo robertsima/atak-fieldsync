@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Peer-to-peer mesh of field nodes: a map-pin "home" node linked to two peer nodes,
+     evoking field observations syncing across a mesh. White so it reads on the dark nav bar. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- connecting links (triangle between the three nodes) -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.4"
+        android:strokeAlpha="0.85"
+        android:fillColor="#00000000"
+        android:pathData="M12,5 L5,17.5 L19,17.5 Z" />
+
+    <!-- top node: a map pin with a cut-out center -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M12,1 C9.24,1 7,3.24 7,6 C7,9.75 12,14 12,14 C12,14 17,9.75 17,6 C17,3.24 14.76,1 12,1 Z M12,4.2 C13,4.2 13.8,5 13.8,6 C13.8,7 13,7.8 12,7.8 C11,7.8 10.2,7 10.2,6 C10.2,5 11,4.2 12,4.2 Z" />
+
+    <!-- bottom-left peer node -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M5,17.5 m-2.6,0 a2.6,2.6 0 1,0 5.2,0 a2.6,2.6 0 1,0 -5.2,0" />
+
+    <!-- bottom-right peer node -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M19,17.5 m-2.6,0 a2.6,2.6 0 1,0 5.2,0 a2.6,2.6 0 1,0 -5.2,0" />
+
+</vector>

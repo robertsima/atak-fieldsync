@@ -5,4 +5,19 @@
     <color name="darker_gray">#121212</color>
     <color name="heading_yellow">#dfb228</color>
 
+    <!-- Observation category badges -->
+    <color name="cat_hazard">#E53935</color>
+    <color name="cat_infrastructure">#3949AB</color>
+    <color name="cat_logistics">#00897B</color>
+    <color name="cat_medical">#43A047</color>
+    <color name="cat_security">#FB8C00</color>
+    <color name="cat_general">#757575</color>
+
+    <color name="important_star">#FFD54F</color>
+
+    <!-- AI response confidence chips -->
+    <color name="conf_low">#757575</color>
+    <color name="conf_moderate">#FB8C00</color>
+    <color name="conf_high">#43A047</color>
+
 </resources>

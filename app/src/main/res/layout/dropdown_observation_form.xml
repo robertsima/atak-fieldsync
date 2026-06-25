@@ -42,6 +42,7 @@
             android:id="@+id/obs_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
             android:layout_marginBottom="16dp" />
 
         <CheckBox
@@ -49,6 +50,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Use current location"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/obs_coord"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#88FFFFFF"
+            android:textSize="12sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/obs_important"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mark as important (draws on map + notifies AI)"
             android:textColor="@android:color/white"
             android:layout_marginBottom="24dp" />
 

@@ -3,34 +3,192 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center">
+    android:padding="12dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="FieldSync"
         android:textColor="@android:color/white"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:gravity="center"
-        android:paddingBottom="32dp" />
+        android:paddingBottom="8dp" />
 
-    <Button
-        android:id="@+id/btn_observations"
-        style="@style/darkButton"
+    <!-- ===== Tab bar ===== -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_marginBottom="16dp"
-        android:text="Field Observations"
-        android:textSize="16sp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_ask_ai"
-        style="@style/darkButton"
+        <Button
+            android:id="@+id/tab_btn_quick"
+            style="@style/darkButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Quick Add" />
+
+        <Button
+            android:id="@+id/tab_btn_obs"
+            style="@style/darkButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Observations" />
+
+        <Button
+            android:id="@+id/tab_btn_ai"
+            style="@style/darkButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="AI Updates" />
+    </LinearLayout>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:text="Ask AI"
-        android:textSize="16sp" />
+        android:layout_height="1dp"
+        android:background="#44FFFFFF"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- ===== Tab content ===== -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- Quick Add -->
+        <LinearLayout
+            android:id="@+id/tab_quick"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Drop an objective / update at your current location."
+                android:textColor="#AAFFFFFF"
+                android:textSize="12sp"
+                android:paddingBottom="8dp" />
+
+            <EditText
+                android:id="@+id/quick_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#22FFFFFF"
+                android:textColor="@android:color/white"
+                android:textColorHint="#88FFFFFF"
+                android:hint="What's happening…"
+                android:padding="8dp"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:gravity="top|start"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <CheckBox
+                    android:id="@+id/quick_important"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Important"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/btn_quick_drop"
+                    style="@style/darkButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Drop" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tip: long-press the map to drop at any point."
+                android:textColor="#66FFFFFF"
+                android:textSize="11sp"
+                android:paddingTop="12dp" />
+        </LinearLayout>
+
+        <!-- Observations -->
+        <LinearLayout
+            android:id="@+id/tab_obs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btn_new_observation"
+                style="@style/darkButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+ New observation"
+                android:layout_marginBottom="6dp" />
+
+            <ListView
+                android:id="@+id/obs_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:divider="#33FFFFFF"
+                android:dividerHeight="1dp" />
+
+            <TextView
+                android:id="@+id/obs_empty"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="No observations yet.\nUse Quick Add or long-press the map."
+                android:textColor="#88FFFFFF"
+                android:textSize="14sp"
+                android:padding="24dp" />
+        </LinearLayout>
+
+        <!-- AI Updates -->
+        <LinearLayout
+            android:id="@+id/tab_ai"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Generated automatically from important field activity."
+                android:textColor="#88FFFFFF"
+                android:textSize="12sp"
+                android:paddingBottom="8dp" />
+
+            <ListView
+                android:id="@+id/ai_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:divider="#33FFFFFF"
+                android:dividerHeight="1dp" />
+
+            <TextView
+                android:id="@+id/ai_empty"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="No AI updates yet.\nThey appear automatically when important field activity is detected."
+                android:textColor="#88FFFFFF"
+                android:textSize="14sp"
+                android:padding="24dp" />
+        </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

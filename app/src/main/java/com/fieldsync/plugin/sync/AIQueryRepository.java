@@ -27,6 +27,10 @@ public class AIQueryRepository {
         void onResponseReceived(AIResponse response);
     }
 
+    public interface RecentResponsesListener {
+        void onResponsesChanged(List<AIResponse> responses);
+    }
+
     public static synchronized AIQueryRepository getInstance() {
         if (instance == null) instance = new AIQueryRepository();
         return instance;
@@ -74,6 +78,24 @@ public class AIQueryRepository {
                 }
             }
         );
+    }
+
+    /** Live feed of the most recent AI responses, newest first. Drives the AI Updates screen. */
+    public DittoStoreObserver observeRecentResponses(int limit, RecentResponsesListener listener) {
+        Ditto d = ditto();
+        if (d == null) {
+            Log.w(TAG, "observeRecentResponses skipped — Ditto not initialized");
+            return null;
+        }
+        // Inline the limit — it is a small controlled integer, not user input.
+        String query = "SELECT * FROM ai_responses ORDER BY timestamp DESC LIMIT " + limit;
+        return DittoHelper.registerObserver(d, query, result -> {
+            List<AIResponse> list = new ArrayList<>();
+            for (DittoQueryResultItem item : result.getItems()) {
+                list.add(responseFromQueryItem(item));
+            }
+            listener.onResponsesChanged(list);
+        });
     }
 
     // One-shot read using an observer + latch: observer fires immediately with current store state.

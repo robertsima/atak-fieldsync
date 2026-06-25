@@ -46,11 +46,14 @@ public class ObservationRepository {
         doc.put("latitude", obs.latitude);
         doc.put("longitude", obs.longitude);
         doc.put("timestamp", obs.timestamp);
-        doc.put("archived", false);
+        doc.put("archived", obs.archived);
+        doc.put("important", obs.important);
 
         try {
+            // Upsert: editing an existing observation reuses its _id, so an INSERT would
+            // otherwise conflict. ON ID CONFLICT DO UPDATE makes create and edit share this path.
             DittoHelper.execute(d,
-                "INSERT INTO observations DOCUMENTS (:doc)",
+                "INSERT INTO observations DOCUMENTS (:doc) ON ID CONFLICT DO UPDATE",
                 Collections.singletonMap("doc", doc));
         } catch (Exception e) {
             Log.e(TAG, "insert failed", e);
@@ -68,6 +71,33 @@ public class ObservationRepository {
         } catch (Exception e) {
             Log.e(TAG, "archive failed", e);
         }
+    }
+
+    /** One-shot lookup of a single observation by id. Returns null if not found / Ditto down. */
+    public Observation getById(String id) {
+        Ditto d = ditto();
+        if (d == null) return null;
+
+        final Observation[] holder = new Observation[1];
+        java.util.concurrent.CountDownLatch latch = new java.util.concurrent.CountDownLatch(1);
+        DittoStoreObserver obs = DittoHelper.registerObserverWithArgs(
+            d,
+            "SELECT * FROM observations WHERE _id=:id",
+            Collections.singletonMap("id", id),
+            result -> {
+                if (!result.getItems().isEmpty()) {
+                    holder[0] = fromQueryItem(result.getItems().get(0));
+                }
+                latch.countDown();
+            });
+        try {
+            latch.await(5, java.util.concurrent.TimeUnit.SECONDS);
+        } catch (InterruptedException ignored) {
+            Thread.currentThread().interrupt();
+        } finally {
+            if (obs != null) obs.close();
+        }
+        return holder[0];
     }
 
     public DittoStoreObserver observeActive(ObservationListener listener) {
@@ -102,6 +132,7 @@ public class ObservationRepository {
             obs.longitude = json.optDouble("longitude", 0.0);
             obs.timestamp = json.optLong("timestamp");
             obs.archived = json.optBoolean("archived", false);
+            obs.important = json.optBoolean("important", false);
             return obs;
         } catch (JSONException e) {
             throw new RuntimeException("Failed to parse observation", e);

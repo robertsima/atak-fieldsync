@@ -9,7 +9,7 @@ public class FieldSyncTool extends AbstractPluginTool {
         super(ctx,
             ctx.getString(R.string.app_name),
             ctx.getString(R.string.app_name),
-            ctx.getResources().getDrawable(R.drawable.ic_launcher),
+            ctx.getResources().getDrawable(R.drawable.ic_fieldsync),
             Actions.SHOW_MAIN);
     }
 }

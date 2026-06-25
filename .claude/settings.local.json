@@ -5,7 +5,8 @@
       "Bash(javap -p \"libs/main.jar\")",
       "Bash(adb shell *)",
       "PowerShell(adb shell *)",
-      "PowerShell(adb *)"
+      "PowerShell(adb *)",
+      "PowerShell(Get-ChildItem *)"
     ]
   }
 }

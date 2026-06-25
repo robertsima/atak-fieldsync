@@ -10,4 +10,5 @@ public class Observation {
     public double longitude;
     public long timestamp;
     public boolean archived;
+    public boolean important;   // operator-flagged as high priority
 }
