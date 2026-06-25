@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:text="Observation"
             android:textColor="#AAFFFFFF"
-            android:textSize="12sp"
+            android:textSize="15sp"
             android:paddingBottom="4dp" />
 
         <EditText
@@ -24,7 +24,7 @@
             android:background="#22FFFFFF"
             android:textColor="@android:color/white"
             android:textColorHint="#88FFFFFF"
-            android:hint="Describe what you observed…"
+            android:hint="Describe observation…"
             android:padding="8dp"
             android:gravity="top|start"
             android:inputType="textMultiLine"
@@ -43,13 +43,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="15dp" />
 
         <CheckBox
             android:id="@+id/obs_use_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Use current location"
+            android:text="Use location"
             android:textColor="@android:color/white"
             android:layout_marginBottom="4dp" />
 
@@ -67,9 +67,21 @@
             android:id="@+id/obs_important"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mark as important (draws on map + notifies AI)"
+            android:text="IMPORTANT"
             android:textColor="@android:color/white"
-            android:layout_marginBottom="24dp" />
+            android:textFontWeight="600"
+            android:layout_marginBottom="0dp" />
+
+        <!--suppress AndroidUnresolvableTag -->
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp"
+            android:text="Select for map markers and analysis"
+            android:textColor="#AAFFFFFF"
+            android:textSize="15sp" />
 
         <LinearLayout
             android:layout_width="match_parent"

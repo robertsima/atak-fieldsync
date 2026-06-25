@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="AI Updates" />
+            android:text="Analysis Logs" />
     </LinearLayout>
 
     <View
@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Drop an objective / update at your current location."
+                android:text="Drop an observation at your current location"
                 android:textColor="#AAFFFFFF"
                 android:textSize="12sp"
                 android:paddingBottom="8dp" />
@@ -80,7 +80,7 @@
                 android:background="#22FFFFFF"
                 android:textColor="@android:color/white"
                 android:textColorHint="#88FFFFFF"
-                android:hint="What's happening…"
+                android:hint="Describe observation…"
                 android:padding="8dp"
                 android:inputType="textMultiLine"
                 android:minLines="2"
@@ -98,15 +98,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Important"
+                    android:text="IMPORTANT"
+                    android:textFontWeight="600"
                     android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/btn_quick_drop"
                     style="@style/darkButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Drop" />
+                    android:layout_weight="1"
+                    android:text="Submit" />
             </LinearLayout>
 
             <TextView
@@ -184,7 +186,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="No AI updates yet.\nThey appear automatically when important field activity is detected."
+                android:text="No analysis logs yet.\nThey appear automatically when important field activity is detected."
                 android:textColor="#88FFFFFF"
                 android:textSize="14sp"
                 android:padding="24dp" />

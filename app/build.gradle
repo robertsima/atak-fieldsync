@@ -69,11 +69,18 @@ buildscript {
 
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android") version "2.2.0"
+    id("org.jetbrains.kotlin.android")
 }
+
 apply {
     plugin("atak-takdev-plugin")
     from("../gradle/typst.gradle")
+}
+
+android {
+    viewBinding {
+        enabled = true
+    }
 }
 
 allprojects {
@@ -103,7 +110,7 @@ def supportedFlavors =
 ]
 
 android {
-    compileSdk 36
+    compileSdk 35
     namespace 'com.fieldsync.plugin'
 
     buildFeatures {
@@ -115,8 +122,14 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
+// Source - https://stackoverflow.com/a/79685256
+// Posted by virtual-adam, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-06-25, License - CC BY-SA 4.0
+
+    kotlin {
+        jvmToolchain {
+            languageVersion.set(JavaLanguageVersion.of(17))
+        }
     }
 
     // this is required and should not be removed otherwise the TAK 
@@ -249,6 +262,7 @@ android {
         abortOnError true
         checkReleaseBuilds true
     }
+    buildToolsVersion '37.0.0'
 }
 
 // Inject Ditto credentials from .env file into BuildConfig
@@ -306,6 +320,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     implementation 'com.ditto:ditto-kotlin-android:5.0.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    implementation files('D:\\Development\\ATAK\\ATAK-CIV-5.6.0-SDK\\atak-javadoc.jar')
 }
 
 configurations.all {
